@@ -11,7 +11,7 @@ app.use('/api/auth',        require('./routes/auth'));
 app.use('/api/menu',        require('./routes/menu'));
 app.use('/api/tables',      require('./routes/tables'));
 app.use('/api/orders',      require('./routes/orders'));
-app.use('/api/restaurants', require('./routes/restaurants'));
+//app.use('/api/restaurants', require('./routes/restaurants'));
 
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 

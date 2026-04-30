@@ -3,29 +3,22 @@ const { query } = require('../db/oracle');
 const auth = require('../middleware/auth');
 const router = express.Router();
 
-// ÖFFENTLICH: Speisekarte für Gäste
+// ÖFFENTLICH: Speisekarte direkt laden
 router.get('/', async (req, res) => {
   try {
-    const items = await query('SELECT * FROM menu_items FETCH FIRST 10 ROWS ONLY');
+    // Hier einfach deine echte Tabelle abfragen
+    const items = await query('SELECT * FROM menu_items'); 
     res.json(items.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-router.get('/public/:slug', async (req, res) => {
-  const restRes = await query(
-    'SELECT id, name FROM restaurants WHERE slug = :1 AND is_live = 1',
-    [req.params.slug]
-  );
-  const rest = restRes.rows[0];
-  if (!rest) return res.status(404).json({ error: 'Nicht gefunden' });
 
-  const cats  = await query('SELECT * FROM menu_categories WHERE restaurant_id = :1 AND is_active = 1 ORDER BY sort_order', [rest.ID]);
-  const items = await query('SELECT * FROM menu_items WHERE restaurant_id = :1 AND is_available = 1 ORDER BY sort_order', [rest.ID]);
+// Die POST-Methoden (Kategorie/Gericht hinzufügen) unten drunter 
+// müssen auch angepasst werden, falls sie "restaurant_id" nutzen wollen!
+// Wenn du keine Restaurants hast, lösche die Zeilen mit restRes/restaurantId einfach raus.
 
-  res.json({ restaurant: rest, categories: cats.rows, items: items.rows });
-});
-
+module.exports = router;
 // Kategorie hinzufügen (Login nötig)
 router.post('/categories', auth, async (req, res) => {
   const restRes = await query('SELECT id FROM restaurants WHERE user_id = :1', [req.userId]);

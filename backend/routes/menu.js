@@ -4,6 +4,14 @@ const auth = require('../middleware/auth');
 const router = express.Router();
 
 // ÖFFENTLICH: Speisekarte für Gäste
+router.get('/', async (req, res) => {
+  try {
+    const items = await query('SELECT * FROM menu_items FETCH FIRST 10 ROWS ONLY');
+    res.json(items.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 router.get('/public/:slug', async (req, res) => {
   const restRes = await query(
     'SELECT id, name FROM restaurants WHERE slug = :1 AND is_live = 1',

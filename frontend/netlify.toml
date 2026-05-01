@@ -1,0 +1,11 @@
+[build]
+  # Sagt Netlify, wo es starten soll
+  base = "frontend"
+  # Befehl zum Bauen
+  command = "npm install && npm run build"
+  # Wo die fertigen Dateien liegen
+  publish = "dist"
+
+[build.environment]
+  # Verhindert Abbrüche wegen kleiner Warnungen
+  CI = "false"

@@ -170,7 +170,7 @@ const Landing = () => {
           <div className="phone center">
             <div className="notch"></div>
             <div style={{padding: '25px', textAlign: 'center'}}>
-               <div style={{fontSize: '0.8rem', color: var(--text)}}>Gesamtbetrag</div>
+               <div style={{fontSize: '0.8rem', color: 'var(--text)'}}>Gesamtbetrag</div>
                <div style={{fontSize: '2.2rem', fontWeight: 900, margin: '15px 0'}}>€ 45,43</div>
                <div style={{background: 'var(--blue)', padding: '15px', borderRadius: '12px', fontWeight: 900, marginTop: '100px'}}>€ 45,43 bezahlen ✓</div>
             </div>

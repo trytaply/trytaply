@@ -1,5 +1,0 @@
-# Diese Datei sagt GitHub Pages, welche Ordner ignoriert werden sollen
-exclude:
-  - backend
-  - node_modules
-  - frontend/node_modules
